@@ -1,8 +1,4 @@
-import {
-  ComponentParams,
-  ComponentRendering,
-  Placeholder,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { ComponentParams, ComponentRendering, Placeholder } from '@sitecore-content-sdk/nextjs';
 import React from 'react';
 
 interface ComponentProps {
@@ -11,12 +7,12 @@ interface ComponentProps {
 }
 
 const DefaultContainer = (props: ComponentProps): JSX.Element => {
-  const containerStyles = props?.params?.Styles ?? '';
-  const styles = `${props?.params?.GridParameters} ${containerStyles}`.trimEnd();
-  const phKey = `container-${props?.params?.DynamicPlaceholderId}`;
-  const id = props?.params?.RenderingIdentifier;
+  const containerStyles = props.params && props.params.Styles ? props.params.Styles : '';
+  const styles = `${props.params.GridParameters} ${containerStyles}`.trimEnd();
+  const phKey = `container-${props.params.DynamicPlaceholderId}`;
+  const id = props.params.RenderingIdentifier;
   const mediaUrlPattern = new RegExp(/mediaurl=\"([^"]*)\"/, 'i');
-  const backgroundImage = props?.params?.BackgroundImage as string;
+  const backgroundImage = props.params.BackgroundImage as string;
   let backgroundStyle: { [key: string]: string } = {};
 
   if (backgroundImage && backgroundImage.match(mediaUrlPattern)) {

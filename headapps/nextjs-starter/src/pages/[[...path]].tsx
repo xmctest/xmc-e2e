@@ -2,12 +2,8 @@ import { useEffect } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import NotFound from 'src/NotFound';
 import Layout from 'src/Layout';
-import {
-  SitecoreContext,
-  ComponentPropsContext,
-  StaticPath,
-} from '@sitecore-jss/sitecore-jss-nextjs';
-import { handleEditorFastRefresh } from '@sitecore-jss/sitecore-jss-nextjs/utils';
+import { SitecoreContext, ComponentPropsContext, StaticPath } from '@sitecore-content-sdk/nextjs';
+import { handleEditorFastRefresh } from '@sitecore-content-sdk/nextjs/utils';
 import { SitecorePageProps } from 'lib/page-props';
 import { sitecorePagePropsFactory } from 'lib/page-props-factory';
 import { componentBuilder } from 'temp/componentBuilder';
@@ -20,7 +16,7 @@ const SitecorePage = ({
   headLinks,
 }: SitecorePageProps): JSX.Element => {
   useEffect(() => {
-    // Since Sitecore editors do not support Fast Refresh, need to refresh editor chromes after Fast Refresh finished
+    // Since Sitecore Editor does not support Fast Refresh, need to refresh editor chromes after Fast Refresh finished
     handleEditorFastRefresh();
   }, []);
 

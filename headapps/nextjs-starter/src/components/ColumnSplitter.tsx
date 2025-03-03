@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  ComponentParams,
-  ComponentRendering,
-  Placeholder,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { ComponentParams, ComponentRendering, Placeholder } from '@sitecore-content-sdk/nextjs';
 
 interface ComponentProps {
   rendering: ComponentRendering & { params: ComponentParams };
@@ -11,7 +7,7 @@ interface ComponentProps {
 }
 
 export const Default = (props: ComponentProps): JSX.Element => {
-  const styles = `${props?.params?.GridParameters ?? ''} ${props?.params?.Styles ?? ''}`.trimEnd();
+  const styles = `${props.params.GridParameters ?? ''} ${props.params.Styles ?? ''}`.trimEnd();
   const columnWidths = [
     props.params.ColumnWidth1,
     props.params.ColumnWidth2,

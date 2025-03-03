@@ -1,9 +1,9 @@
-import { EditingConfigMiddleware } from '@sitecore-jss/sitecore-jss-nextjs/editing';
+import { EditingConfigMiddleware } from '@sitecore-content-sdk/nextjs/editing';
 import { components } from 'temp/componentBuilder';
 import metadata from 'temp/metadata.json';
 
 /**
- * This Next.js API route is used by Sitecore editors (Pages) in XM Cloud
+ * This Next.js API route is used by Sitecore Editor in XM Cloud
  * to determine feature compatibility and configuration.
  */
 

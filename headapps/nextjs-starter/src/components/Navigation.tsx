@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Link,
-  LinkField,
-  Text,
-  TextField,
-  useSitecoreContext,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+import { Link, LinkField, Text, TextField, useSitecoreContext } from '@sitecore-content-sdk/nextjs';
 
 interface Fields {
   Id: string;
@@ -52,7 +46,7 @@ export const Default = (props: NavigationProps): JSX.Element => {
   const { sitecoreContext } = useSitecoreContext();
   const styles =
     props.params != null
-      ? `${props.params.GridParameters ?? ''} ${props?.params?.Styles ?? ''}`.trimEnd()
+      ? `${props.params.GridParameters ?? ''} ${props.params.Styles ?? ''}`.trimEnd()
       : '';
   const id = props.params != null ? props.params.RenderingIdentifier : null;
 
@@ -110,7 +104,7 @@ export const Default = (props: NavigationProps): JSX.Element => {
 const NavigationList = (props: NavigationProps) => {
   const { sitecoreContext } = useSitecoreContext();
   const [active, setActive] = useState(false);
-  const classNameList = `${props?.fields?.Styles.concat('rel-level' + props.relativeLevel).join(
+  const classNameList = `${props.fields.Styles.concat('rel-level' + props.relativeLevel).join(
     ' '
   )}`;
 

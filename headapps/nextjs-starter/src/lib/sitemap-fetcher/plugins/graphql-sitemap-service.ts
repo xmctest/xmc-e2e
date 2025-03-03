@@ -1,10 +1,5 @@
-import {
-  MultisiteGraphQLSitemapService,
-  StaticPath,
-  constants,
-  SiteInfo,
-} from '@sitecore-jss/sitecore-jss-nextjs';
-import config from 'temp/config';
+import { MultisiteGraphQLSitemapService, StaticPath, SiteInfo } from '@sitecore-content-sdk/nextjs';
+import config from 'sitecore.config';
 import { SitemapFetcherPlugin } from '..';
 import { GetStaticPathsContext } from 'next';
 import { siteResolver } from 'lib/site-resolver';
@@ -21,9 +16,6 @@ class GraphqlSitemapServicePlugin implements SitemapFetcherPlugin {
   }
 
   async exec(context?: GetStaticPathsContext): Promise<StaticPath[]> {
-    if (process.env.JSS_MODE === constants.JSS_MODE.DISCONNECTED) {
-      return [];
-    }
     return process.env.EXPORT_MODE
       ? this._graphqlSitemapService.fetchExportSitemap(config.defaultLanguage)
       : this._graphqlSitemapService.fetchSSGSitemap(context?.locales || []);

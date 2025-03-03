@@ -3,7 +3,7 @@ import {
   RichText as JssRichText,
   useSitecoreContext,
   RichTextField,
-} from '@sitecore-jss/sitecore-jss-nextjs';
+} from '@sitecore-content-sdk/nextjs';
 
 interface Fields {
   Content: RichTextField;
@@ -23,7 +23,7 @@ type ComponentContentProps = {
 const ComponentContent = (props: ComponentContentProps) => {
   const id = props.id;
   return (
-    <div className={`component content ${props?.styles}`} id={id ? id : undefined}>
+    <div className={`component content ${props.styles}`} id={id ? id : undefined}>
       <div className="component-content">
         <div className="field-content">{props.children}</div>
       </div>
@@ -37,7 +37,7 @@ export const Default = (props: PageContentProps): JSX.Element => {
 
   if (!(props.fields && props.fields.Content) && !sitecoreContext?.route?.fields?.Content) {
     return (
-      <div className={`component content ${props?.params?.styles}`} id={id ? id : undefined}>
+      <div className={`component content ${props.params.styles}`} id={id ? id : undefined}>
         <div className="component-content">
           <div className="field-content">[Content]</div>
         </div>
@@ -52,7 +52,7 @@ export const Default = (props: PageContentProps): JSX.Element => {
   ) as RichTextField;
 
   return (
-    <ComponentContent styles={props?.params?.styles} id={id}>
+    <ComponentContent styles={props.params.styles} id={id}>
       <JssRichText field={field} />
     </ComponentContent>
   );
