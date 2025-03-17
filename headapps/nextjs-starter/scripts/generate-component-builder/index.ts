@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const plugins = require('scripts/temp/generate-component-builder-plugins');
-import { PackageDefinition, ComponentFile } from '@sitecore-content-sdk/dev-tools';
+import { PackageDefinition, ComponentFile } from '@sitecore-content-sdk/nextjs/tools';
 
 export interface ComponentBuilderPluginConfig {
   watch?: boolean;
