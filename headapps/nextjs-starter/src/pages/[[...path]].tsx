@@ -11,6 +11,7 @@ import {
 import { extractPath, handleEditorFastRefresh } from '@sitecore-content-sdk/nextjs/utils';
 import client from 'lib/sitecore-client';
 import { componentBuilder } from 'temp/componentBuilder';
+import scConfig from 'sitecore.config';
 
 const SitecorePage = ({ notFound, componentProps, layout }: SitecorePageProps): JSX.Element => {
   useEffect(() => {
@@ -30,6 +31,7 @@ const SitecorePage = ({ notFound, componentProps, layout }: SitecorePageProps): 
       <SitecoreContext
         componentFactory={componentBuilder.getComponentFactory({ isEditing })}
         layoutData={layout}
+        api={scConfig.api}
       >
         <Layout layoutData={layout} />
       </SitecoreContext>
