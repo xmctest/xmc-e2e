@@ -1,7 +1,7 @@
 /**
  * This Layout is needed for Starter Kit.
  */
-import React from 'react';
+import React, { JSX } from 'react';
 import Head from 'next/head';
 import {
   Placeholder,
