@@ -24,7 +24,7 @@
   "dependencies": {
     "@sitecore-cloudsdk/core": "^0.5.0",
     "@sitecore-cloudsdk/events": "^0.5.0",
-    "@sitecore-content-sdk/nextjs": "0.2.0-canary.23",
+    "@sitecore-content-sdk/nextjs": "0.2.0-canary.24",
     "@sitecore-feaas/clientside": "^0.5.19",
     "@sitecore/components": "~2.0.1",
     "bootstrap": "^5.3.3",
@@ -38,7 +38,7 @@
     "sharp": "0.33.5"
   },
   "devDependencies": {
-    "@sitecore-content-sdk/cli": "0.2.0-canary.23",
+    "@sitecore-content-sdk/cli": "0.2.0-canary.24",
     "@types/node": "^22.9.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.3",
