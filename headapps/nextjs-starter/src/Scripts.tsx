@@ -3,6 +3,7 @@ import { EditingScripts } from '@sitecore-content-sdk/nextjs';
 import BYOC from 'src/byoc';
 import FEAASScripts from 'components/FEAASScripts';
 import CdpPageView from 'components/CdpPageView';
+import { JSX } from 'react';
 
 const Scripts = (): JSX.Element => {
   return (
