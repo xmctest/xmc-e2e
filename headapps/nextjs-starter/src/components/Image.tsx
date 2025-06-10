@@ -5,84 +5,86 @@ import {
   Link as JssLink,
   LinkField,
   Text,
-  useSitecore,
+  useSitecoreContext,
 } from '@sitecore-content-sdk/nextjs';
-import React, { CSSProperties } from 'react';
-import { ComponentProps } from 'lib/component-props';
+import React, { CSSProperties, JSX } from 'react';
 
-interface ImageFields {
-  Image: ImageField;
+interface Fields {
+  Image: ImageField & { metadata?: { [key: string]: unknown } };
   ImageCaption: Field<string>;
   TargetUrl: LinkField;
 }
 
-interface ImageProps extends ComponentProps {
-  fields: ImageFields;
-}
+type ImageProps = {
+  params: { [key: string]: string };
+  fields: Fields;
+};
 
-const ImageWrapper: React.FC<{ className: string; id?: string; children: React.ReactNode }> = ({
-  className,
-  id,
-  children,
-}) => (
-  <div className={className.trim()} id={id}>
-    <div className="component-content">{children}</div>
+const ImageDefault = (props: ImageProps): JSX.Element => (
+  <div className={`component image ${props.params.styles}`.trimEnd()}>
+    <div className="component-content">
+      <span className="is-empty-hint">Image</span>
+    </div>
   </div>
 );
 
-const ImageDefault: React.FC<ImageProps> = ({ params }) => (
-  <ImageWrapper className={`component image ${params.styles}`}>
-    <span className="is-empty-hint">Image</span>
-  </ImageWrapper>
-);
-
-export const Banner: React.FC<ImageProps> = ({ params, fields }) => {
-  const { pageContext } = useSitecore();
-  const { styles, RenderingIdentifier: id } = params;
-
-  const backgroundStyle = fields?.Image?.value?.src
-    ? ({ backgroundImage: `url('${fields.Image.value.src}')` } as CSSProperties)
-    : {};
-
-  const imageField = fields.Image && {
-    ...fields.Image,
+export const Banner = (props: ImageProps): JSX.Element => {
+  const id = props.params.RenderingIdentifier;
+  const { sitecoreContext } = useSitecoreContext();
+  const isPageEditing = sitecoreContext.pageEditing;
+  const classHeroBannerEmpty =
+    isPageEditing && props.fields?.Image?.value?.class === 'scEmptyImage'
+      ? 'hero-banner-empty'
+      : '';
+  const backgroundStyle = (props?.fields?.Image?.value?.src && {
+    backgroundImage: `url('${props.fields.Image.value.src}')`,
+  }) as CSSProperties;
+  const modifyImageProps = {
+    ...props.fields.Image,
     value: {
-      ...fields.Image.value,
+      ...props.fields.Image.value,
       style: { width: '100%', height: '100%' },
     },
   };
 
   return (
-    <div className={`component hero-banner ${styles}`.trim()} id={id}>
+    <div
+      className={`component hero-banner ${props.params.styles} ${classHeroBannerEmpty}`}
+      id={id ? id : undefined}
+    >
       <div className="component-content sc-sxa-image-hero-banner" style={backgroundStyle}>
-        {pageContext.pageEditing && <JssImage field={imageField} />}
+        {sitecoreContext.pageEditing ? <JssImage field={modifyImageProps} /> : ''}
       </div>
     </div>
   );
 };
 
-export const Default: React.FC<ImageProps> = (props) => {
-  const { pageContext } = useSitecore();
-  const { fields, params } = props;
-  const { styles, RenderingIdentifier: id } = params;
+export const Default = (props: ImageProps): JSX.Element => {
+  const { sitecoreContext } = useSitecoreContext();
 
-  if (!fields) {
-    return <ImageDefault {...props} />;
+  if (props.fields) {
+    const Image = () => <JssImage field={props.fields.Image} />;
+    const id = props.params.RenderingIdentifier;
+
+    return (
+      <div className={`component image ${props.params.styles}`} id={id ? id : undefined}>
+        <div className="component-content">
+          {sitecoreContext.pageState === 'edit' || !props.fields.TargetUrl?.value?.href ? (
+            <Image />
+          ) : (
+            <JssLink field={props.fields.TargetUrl}>
+              <Image />
+            </JssLink>
+          )}
+          <Text
+            tag="span"
+            className="image-caption field-imagecaption"
+            field={props.fields.ImageCaption}
+          />
+        </div>
+      </div>
+    );
   }
 
-  const Image = () => <JssImage field={fields.Image} />;
-  const shouldWrapWithLink = !pageContext.pageEditing && fields.TargetUrl?.value?.href;
-
-  return (
-    <ImageWrapper className={`component image ${styles}`} id={id}>
-      {shouldWrapWithLink ? (
-        <JssLink field={fields.TargetUrl}>
-          <Image />
-        </JssLink>
-      ) : (
-        <Image />
-      )}
-      <Text tag="span" className="image-caption field-imagecaption" field={fields.ImageCaption} />
-    </ImageWrapper>
-  );
+  return <ImageDefault {...props} />;
 };
