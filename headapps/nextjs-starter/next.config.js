@@ -93,11 +93,11 @@ const nextConfig = {
   // Add sass settings for SXA themes and styles
   sassOptions: {
     importer: new SassAlias({
-      '@sass': path.join(process.cwd(), './src/assets', 'sass'),
+      '@globals': path.join(process.cwd(), './src/assets', 'globals'),
       '@fontawesome': path.join(process.cwd(), './node_modules', 'font-awesome'),
     }).getImporter(),
     // temporary measure until new versions of bootstrap and font-awesome released
-    quietDeps: true,
+    quietDeps: true,    
     silenceDeprecations: ["import", "legacy-js-api"],
   },
 };
