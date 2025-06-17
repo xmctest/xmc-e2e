@@ -5,8 +5,8 @@ import {
   useSitecoreContext,
 } from '@sitecore-jss/sitecore-jss-nextjs';
 import { useEffect } from 'react';
-import config from 'temp/config';
 import { pageView } from '@sitecore-cloudsdk/events/browser';
+import config from 'temp/config';
 
 /**
  * This is the CDP page view component.
