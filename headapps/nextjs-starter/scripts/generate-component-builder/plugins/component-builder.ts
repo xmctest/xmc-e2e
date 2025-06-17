@@ -8,7 +8,7 @@ import {
  * Generates the component builder file.
  */
 class ComponentBuilderPlugin implements ComponentBuilderPluginType {
-  order = 99;
+  order = 9999;
 
   exec(config: ComponentBuilderPluginConfig) {
     generateComponentBuilder(config);
