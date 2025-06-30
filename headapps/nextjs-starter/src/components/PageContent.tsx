@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { JSX } from 'react';
 import { RichText as JssRichText, useSitecore, RichTextField } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';

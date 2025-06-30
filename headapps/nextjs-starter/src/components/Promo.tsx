@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { JSX } from 'react';
 import {
   NextImage as JssImage,

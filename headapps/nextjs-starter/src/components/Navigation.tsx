@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useState, JSX } from 'react';
 import { Link, LinkField, Text, TextField, useSitecore } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
