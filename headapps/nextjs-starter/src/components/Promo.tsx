@@ -1,8 +1,8 @@
 import React, { JSX } from 'react';
 import {
-  NextImage as ContentSdkImage,
-  Link as ContentSdkLink,
-  RichText as ContentSdkRichText,
+  NextImage as JssImage,
+  Link as JssLink,
+  RichText as JssRichText,
   ImageField,
   Field,
   LinkField,
@@ -46,7 +46,7 @@ const PromoContent = (props: PromoContentProps): JSX.Element => {
     <Wrapper>
       <>
         <div className="field-promoicon">
-          <ContentSdkImage field={fields.PromoIcon} />
+          <JssImage field={fields.PromoIcon} />
         </div>
         <div className="promo-text">{renderText(fields)}</div>
       </>
@@ -58,10 +58,10 @@ export const Default = (props: PromoProps): JSX.Element => {
   const renderText = (fields: Fields) => (
     <>
       <div className="field-promotext">
-        <ContentSdkRichText field={fields.PromoText} />
+        <JssRichText field={fields.PromoText} />
       </div>
       <div className="field-promolink">
-        <ContentSdkLink field={fields.PromoLink} />
+        <JssLink field={fields.PromoLink} />
       </div>
     </>
   );
@@ -73,10 +73,10 @@ export const WithText = (props: PromoProps): JSX.Element => {
   const renderText = (fields: Fields) => (
     <>
       <div className="field-promotext">
-        <ContentSdkRichText className="promo-text" field={fields.PromoText} />
+        <JssRichText className="promo-text" field={fields.PromoText} />
       </div>
       <div className="field-promotext">
-        <ContentSdkRichText className="promo-text" field={fields.PromoText2} />
+        <JssRichText className="promo-text" field={fields.PromoText2} />
       </div>
     </>
   );

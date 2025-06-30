@@ -1,8 +1,8 @@
 import {
   Field,
   ImageField,
-  NextImage as ContentSdkImage,
-  Link as ContentSdkLink,
+  NextImage as JssImage,
+  Link as JssLink,
   LinkField,
   Text,
   useSitecore,
@@ -55,7 +55,7 @@ export const Banner: React.FC<ImageProps> = ({ params, fields }) => {
   return (
     <div className={`component hero-banner ${styles}`.trim()} id={id}>
       <div className="component-content sc-sxa-image-hero-banner" style={backgroundStyle}>
-        {pageContext.pageEditing && <ContentSdkImage field={imageField} />}
+        {pageContext.pageEditing && <JssImage field={imageField} />}
       </div>
     </div>
   );
@@ -70,15 +70,15 @@ export const Default: React.FC<ImageProps> = (props) => {
     return <ImageDefault {...props} />;
   }
 
-  const Image = () => <ContentSdkImage field={fields.Image} />;
+  const Image = () => <JssImage field={fields.Image} />;
   const shouldWrapWithLink = !pageContext.pageEditing && fields.TargetUrl?.value?.href;
 
   return (
     <ImageWrapper className={`component image ${styles}`} id={id}>
       {shouldWrapWithLink ? (
-        <ContentSdkLink field={fields.TargetUrl}>
+        <JssLink field={fields.TargetUrl}>
           <Image />
-        </ContentSdkLink>
+        </JssLink>
       ) : (
         <Image />
       )}

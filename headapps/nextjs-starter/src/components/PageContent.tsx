@@ -1,9 +1,5 @@
 import React, { JSX } from 'react';
-import {
-  RichText as ContentSdkRichText,
-  useSitecore,
-  RichTextField,
-} from '@sitecore-content-sdk/nextjs';
+import { RichText as JssRichText, useSitecore, RichTextField } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 
 interface Fields {
@@ -23,9 +19,7 @@ export const Default = ({ params, fields }: PageContentProps): JSX.Element => {
   return (
     <div className={`component content ${styles}`} id={id}>
       <div className="component-content">
-        <div className="field-content">
-          {field ? <ContentSdkRichText field={field} /> : '[Content]'}
-        </div>
+        <div className="field-content">{field ? <JssRichText field={field} /> : '[Content]'}</div>
       </div>
     </div>
   );
