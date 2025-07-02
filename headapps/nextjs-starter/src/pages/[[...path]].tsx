@@ -1,5 +1,6 @@
 import { useEffect, JSX } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import sites from '.sitecore/sites.json';
 import NotFound from 'src/NotFound';
 import Layout from 'src/Layout';
 import {
@@ -7,6 +8,7 @@ import {
   ComponentPropsContext,
   SitecorePageProps,
   StaticPath,
+  SiteInfo,
 } from '@sitecore-content-sdk/nextjs';
 import { extractPath, handleEditorFastRefresh } from '@sitecore-content-sdk/nextjs/utils';
 import { isDesignLibraryPreviewData } from '@sitecore-content-sdk/nextjs/editing';
@@ -50,7 +52,10 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
   if (process.env.NODE_ENV !== 'development' && scConfig.generateStaticPaths) {
     try {
-      paths = await client.getPagePaths(context?.locales || []);
+      paths = await client.getPagePaths(
+        sites.map((site: SiteInfo) => site.name),
+        context?.locales || []
+      );
     } catch (error) {
       console.log('Error occurred while fetching static paths');
       console.log(error);
@@ -83,7 +88,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (page) {
     props = {
       ...page,
-      dictionary: await client.getDictionary({ site: page.site?.name, locale: page.locale }),
+      dictionary: await client.getDictionary({
+        site: page.siteName,
+        locale: page.locale,
+      }),
       componentProps: await client.getComponentData(page.layout, context, components),
     };
   }
