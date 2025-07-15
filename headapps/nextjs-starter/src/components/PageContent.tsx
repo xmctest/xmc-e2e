@@ -11,7 +11,7 @@ type PageContentProps = ComponentProps & {
 };
 
 export const Default = ({ params, fields }: PageContentProps): JSX.Element => {
-  //const { pageContext } = useSitecore();
+  // const { pageContext } = useSitecore();
   const { styles, RenderingIdentifier: id } = params;
 
   const field = fields?.Content;
