@@ -38,12 +38,6 @@ const Custom500 = (props: SitecorePageProps): JSX.Element => {
     <SitecoreContext
       componentFactory={componentBuilder.getComponentFactory()}
       layoutData={props.layoutData}
-      api={{
-        edge: {
-          contextId: config.sitecoreEdgeContextId,
-          edgeUrl: config.sitecoreEdgeUrl,
-        },
-      }}
     >
       <Layout layoutData={props.layoutData} headLinks={props.headLinks} />
     </SitecoreContext>
@@ -63,7 +57,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   });
   let resultErrorPages: ErrorPages | null = null;
 
-  if (process.env.DISABLE_SSG_FETCH?.toLowerCase() !== 'true') {
+  if (!process.env.DISABLE_SSG_FETCH) {
     try {
       resultErrorPages = await errorPagesService.fetchErrorPages();
     } catch (error) {

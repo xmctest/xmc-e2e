@@ -7,8 +7,7 @@ import { Plugin, isServerSidePropsContext } from '..';
 class ComponentPropsPlugin implements Plugin {
   private componentPropsService: ComponentPropsService;
 
-  // Make sure to run this plugin last to ensure that the updated layout data is used
-  order = 10;
+  order = 2;
 
   constructor() {
     this.componentPropsService = new ComponentPropsService();
@@ -33,7 +32,7 @@ class ComponentPropsPlugin implements Plugin {
     }
 
     const errors = Object.keys(props.componentProps)
-      .map((id) => {
+      .map(id => {
         const component = props.componentProps[id] as ComponentPropsError;
 
         return component.error
