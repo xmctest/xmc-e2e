@@ -28,7 +28,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@sitecore-jss/sitecore-jss-nextjs": "22.9.0-canary.15",
+    "@sitecore-jss/sitecore-jss-nextjs": "22.9.0-canary.14",
     "next": "^15.4.6",
     "next-localization": "^0.12.0",
     "react": "^19.1.0",
@@ -36,8 +36,8 @@
     "sharp": "0.34.3"
   },
   "devDependencies": {
-    "@sitecore-jss/sitecore-jss-cli": "22.9.0-canary.15",
-    "@sitecore-jss/sitecore-jss-dev-tools": "22.9.0-canary.15",
+    "@sitecore-jss/sitecore-jss-cli": "22.9.0-canary.14",
+    "@sitecore-jss/sitecore-jss-dev-tools": "22.9.0-canary.14",
     "@types/node": "^22.9.0",
     "@types/react": "^19.1.7",
     "@types/react-dom": "^19.1.7",
