@@ -34,3 +34,8 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.custom-title {
+  font-size: 45px;
+  background-color: chocolate;
+}
