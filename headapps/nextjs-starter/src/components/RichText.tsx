@@ -1,3 +1,11 @@
+// For testing: inline styles for .custom-title
+const customTitleStyle = `
+.custom-title {
+  font-size: 45px;
+  background-color: chocolate;
+}
+`;
+
 import { JSX } from 'react';
 import { Field, RichText as JssRichText } from '@sitecore-jss/sitecore-jss-nextjs';
 
@@ -11,6 +19,8 @@ export type RichTextProps = {
 };
 
 export const Default = (props: RichTextProps): JSX.Element => {
+  // Inject style tag for testing
+  const styleTag = <style>{customTitleStyle}</style>;
   const text = props.fields ? (
     <JssRichText tag="p" field={props.fields.Text} className="custom-title" />
   ) : (
@@ -19,11 +29,14 @@ export const Default = (props: RichTextProps): JSX.Element => {
   const id = props.params.RenderingIdentifier;
 
   return (
-    <div
-      className={`component rich-text ${props?.params?.styles.trimEnd()}`}
-      id={id ? id : undefined}
-    >
-      <div className="component-content">{text}</div>
-    </div>
+    <>
+      {styleTag}
+      <div
+        className={`component rich-text ${props?.params?.styles.trimEnd()}`}
+        id={id ? id : undefined}
+      >
+        <div className="component-content">{text}</div>
+      </div>
+    </>
   );
 };
