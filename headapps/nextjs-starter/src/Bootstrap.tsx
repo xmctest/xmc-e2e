@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, JSX } from 'react';
 import { CloudSDK } from '@sitecore-cloudsdk/core/browser';
 import { SitecorePageProps } from '@sitecore-content-sdk/nextjs';

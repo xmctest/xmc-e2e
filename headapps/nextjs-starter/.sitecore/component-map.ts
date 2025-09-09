@@ -11,3 +11,4 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
 ]);
 
 export default componentMap;
+

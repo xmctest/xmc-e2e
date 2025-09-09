@@ -1,3 +1,5 @@
+'use client';
+import React from 'react';
 import {
   ComponentPropsCollection,
   ComponentPropsContext,
@@ -7,22 +9,18 @@ import {
 import components from '.sitecore/component-map';
 import scConfig from 'sitecore.config';
 
-const Providers = ({
+export default function Providers({
   children,
-  componentProps,
   page,
+  componentProps = {},
 }: {
   children: React.ReactNode;
-  componentProps?: ComponentPropsCollection;
   page: Page;
-}) => {
+  componentProps?: ComponentPropsCollection;
+}) {
   return (
-    <ComponentPropsContext value={componentProps || {}}>
-      <SitecoreProvider componentMap={components} api={scConfig.api} page={page}>
-        {children}
-      </SitecoreProvider>
-    </ComponentPropsContext>
+    <SitecoreProvider api={scConfig.api} componentMap={components} page={page}>
+      <ComponentPropsContext value={componentProps}>{children}</ComponentPropsContext>
+    </SitecoreProvider>
   );
-};
-
-export default Providers;
+}
