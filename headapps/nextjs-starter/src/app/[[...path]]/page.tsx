@@ -1,8 +1,6 @@
 import { isDesignLibraryPreviewData } from '@sitecore-content-sdk/nextjs/editing';
 import { notFound } from 'next/navigation';
 import { draftMode } from 'next/headers'
-import { SiteInfo } from '@sitecore-content-sdk/nextjs';
-import sites from '.sitecore/sites.json';
 import client from 'src/lib/sitecore-client';
 import Layout, { RouteFields } from 'src/Layout';
 import components from '.sitecore/component-map';
@@ -49,18 +47,6 @@ export default async function Page({ params, searchParams }: PageProps) {
   );
 }
 
-// This function gets called at build and export time to determine
-// pages for SSG ("paths", as tokenized array).
-export const generateStaticParams = async () => {
-  const paths = await client.getPagePaths(
-    sites.map((site: SiteInfo) => site.name),
-    ['en']
-  );
-  return paths.map((path) => ({
-    path: path.params.path,
-    lang: path.locale,
-  }));
-};
 // Metadata fields for the page.
 export const generateMetadata = async ({ params }: PageProps) => {
   const { path } = await params;
