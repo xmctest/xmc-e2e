@@ -1,4 +1,8 @@
-import { type NextRequest, type NextFetchEvent } from "next/server";
+import {
+  type NextRequest,
+  type NextFetchEvent,
+  NextResponse,
+} from "next/server";
 import {
   defineMiddleware,
   MultisiteMiddleware,
@@ -54,6 +58,9 @@ const personalize = scConfig.personalize?.scope
 
 export function middleware(req: NextRequest, ev: NextFetchEvent) {
   try {
+    if (!scConfig.api?.edge?.contextId) {
+      return NextResponse.next();
+    }
     return defineMiddleware(
       multisite,
       // redirects,
@@ -70,7 +77,7 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
 export const config = {
   /*
    * Match all paths except for:
-   * 1. API route handlers: /sitemap.xml and /robots.txt routes
+   * 1. /api routes
    * 2. /_next (Next.js internals)
    * 3. /sitecore/api (Sitecore API routes)
    * 4. /- (Sitecore media)
@@ -79,6 +86,6 @@ export const config = {
    */
   matcher: [
     "/",
-    "/((?!sitemap|robots|_next/|healthz|sitecore/healthz|sitecore/api/|-/|favicon.ico|sc_logo.svg).*)",
+    "/((?!api/|_next/|healthz|sitecore/api/|-/|favicon.ico|sc_logo.svg).*)",
   ],
 };
