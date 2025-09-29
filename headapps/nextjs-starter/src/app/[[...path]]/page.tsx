@@ -1,20 +1,25 @@
-import { isDesignLibraryPreviewData } from '@sitecore-content-sdk/nextjs/editing';
-import { notFound } from 'next/navigation';
-import { draftMode } from 'next/headers'
-import client from 'src/lib/sitecore-client';
-import Layout, { RouteFields } from 'src/Layout';
-import components from '.sitecore/component-map';
-import Providers from 'src/Providers';
-import Bootstrap from 'src/Bootstrap';
+import { isDesignLibraryPreviewData } from "@sitecore-content-sdk/nextjs/editing";
+import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
+import client from "src/lib/sitecore-client";
+import Layout, { RouteFields } from "src/Layout";
+import components from ".sitecore/component-map";
+import Providers from "src/Providers";
+import Bootstrap from "src/Bootstrap";
+
+export const dynamic = "force-dynamic";
 
 type PageProps = {
-  params: Promise<{ path?: string[]; [key: string]: string | string[] | undefined }>;
+  params: Promise<{
+    path?: string[];
+    [key: string]: string | string[] | undefined;
+  }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export default async function Page({ params, searchParams }: PageProps) {
   const { path } = await params;
-  const draft = await draftMode()
+  const draft = await draftMode();
 
   // Fetch the page data from Sitecore
   let page;
@@ -26,7 +31,7 @@ export default async function Page({ params, searchParams }: PageProps) {
       page = await client.getPreview(editingParams);
     }
   } else {
-    page = await client.getPage(path ?? [], { locale: 'en' });
+    page = await client.getPage(path ?? [], { locale: "en" });
   }
 
   // If the page is not found, return a 404
@@ -35,7 +40,11 @@ export default async function Page({ params, searchParams }: PageProps) {
   }
 
   // Fetch the component data from Sitecore (Likely will be deprecated)
-  const componentProps = await client.getComponentData(page.layout, {}, components);
+  const componentProps = await client.getComponentData(
+    page.layout,
+    {},
+    components
+  );
 
   return (
     <>
@@ -51,8 +60,11 @@ export default async function Page({ params, searchParams }: PageProps) {
 export const generateMetadata = async ({ params }: PageProps) => {
   const { path } = await params;
   // The same call as for rendering the page. Should be cached by default react behavior
-  const page = await client.getPage(path ?? [], { locale: 'en' });
+  const page = await client.getPage(path ?? [], { locale: "en" });
   return {
-    title: (page?.layout.sitecore.route?.fields as RouteFields)?.Title?.value?.toString() || 'Page',
+    title:
+      (
+        page?.layout.sitecore.route?.fields as RouteFields
+      )?.Title?.value?.toString() || "Page",
   };
 };
