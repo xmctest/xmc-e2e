@@ -2,6 +2,7 @@ import { createRobotsRouteHandler } from "@sitecore-content-sdk/nextjs/route-han
 import sites from ".sitecore/sites.json";
 import client from "lib/sitecore-client";
 import scConfig from "sitecore.config";
+import type { NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +16,7 @@ export const dynamic = "force-dynamic";
 
 const { GET: ROBOTS_GET } = createRobotsRouteHandler({ client, sites });
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   if (!scConfig.api?.edge?.contextId) {
     return new Response("User-agent: *\nDisallow:", {
       status: 200,

@@ -2,6 +2,7 @@ import { createSitemapRouteHandler } from "@sitecore-content-sdk/nextjs/route-ha
 import sites from ".sitecore/sites.json";
 import client from "lib/sitecore-client";
 import scConfig from "sitecore.config";
+import type { NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +15,7 @@ export const dynamic = "force-dynamic";
 
 const { GET: SITEMAP_GET } = createSitemapRouteHandler({ client, sites });
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   if (!scConfig.api?.edge?.contextId) {
     return new Response("", { status: 204 });
   }
