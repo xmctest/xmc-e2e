@@ -1,8 +1,6 @@
 import { createRobotsRouteHandler } from "@sitecore-content-sdk/nextjs/route-handler";
 import sites from ".sitecore/sites.json";
 import client from "lib/sitecore-client";
-import scConfig from "sitecore.config";
-import type { NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 
@@ -14,22 +12,4 @@ export const dynamic = "force-dynamic";
  * used by search engine crawlers to determine crawl and indexing rules.
  */
 
-const { GET: ROBOTS_GET } = createRobotsRouteHandler({ client, sites });
-
-export async function GET(req: NextRequest) {
-  if (!scConfig.api?.edge?.contextId) {
-    return new Response("User-agent: *\nDisallow:", {
-      status: 200,
-      headers: { "content-type": "text/plain" },
-    });
-  }
-
-  try {
-    return await ROBOTS_GET(req);
-  } catch {
-    return new Response("User-agent: *\nDisallow:", {
-      status: 200,
-      headers: { "content-type": "text/plain" },
-    });
-  }
-}
+export const { GET } = createRobotsRouteHandler({ client, sites });
