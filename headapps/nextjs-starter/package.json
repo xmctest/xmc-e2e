@@ -16,7 +16,8 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "build": "cross-env NODE_ENV=production npm-run-all --serial sitecore-tools:generate-map sitecore-tools:build next:build",
+    "build": "cross-env NODE_ENV=production npm-run-all --serial sitecore-tools:generate-map sitecore-tools:build next:build prepare:standalone",
+    "prepare:standalone": "node ./scripts/prepare-standalone.cjs",
     "lint": "eslint ./src/**/*.tsx ./src/**/*.ts",
     "next:build": "next build",
     "next:dev": "cross-env NODE_OPTIONS='--inspect' next dev",
