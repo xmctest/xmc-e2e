@@ -77,5 +77,8 @@ export const config = {
    * 5. /healthz (Health check)
    * 7. all root files inside /public
    */
-  matcher: [],
+  matcher: [
+    "/",
+    "/((?!sitemap|robots|_next/|healthz|sitecore/healthz|sitecore/api/|-/|favicon.ico|sc_logo.svg).*)",
+  ],
 };
