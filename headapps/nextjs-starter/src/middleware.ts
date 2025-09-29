@@ -36,26 +36,28 @@ const multisite = new MultisiteMiddleware({
 //   enabled: true,
 // });
 
-const personalize = new PersonalizeMiddleware({
-  /**
-   * List of sites for site resolver to work with
-   */
-  sites,
-  ...(scConfig.api?.edge ?? {}),
-  ...(scConfig.personalize ?? {}),
-  // This function determines if the middleware should be turned off on per-request basis.
-  // Certain paths are ignored by default (e.g. Next.js API routes), but you may wish to disable more.
-  // By default it is disabled while in development mode.
-  // This is an important performance consideration since Next.js Edge middleware runs on every request.
-  skip: () => false,
-});
+const personalize = scConfig.personalize?.scope
+  ? new PersonalizeMiddleware({
+      /**
+       * List of sites for site resolver to work with
+       */
+      sites,
+      ...(scConfig.api?.edge ?? {}),
+      ...(scConfig.personalize ?? {}),
+      // This function determines if the middleware should be turned off on per-request basis.
+      // Certain paths are ignored by default (e.g. Next.js API routes), but you may wish to disable more.
+      // By default it is disabled while in development mode.
+      // This is an important performance consideration since Next.js Edge middleware runs on every request.
+      skip: () => false,
+    })
+  : null;
 
 export function middleware(req: NextRequest, ev: NextFetchEvent) {
   try {
     return defineMiddleware(
       multisite,
       // redirects,
-      personalize
+      ...(personalize ? [personalize] : [])
     ).exec(req, ev);
   } catch (error) {
     console.error("[middleware] execution error", {
@@ -75,8 +77,5 @@ export const config = {
    * 5. /healthz (Health check)
    * 7. all root files inside /public
    */
-  matcher: [
-    "/",
-    "/((?!sitemap|robots|_next/|healthz|sitecore/api/|-/|favicon.ico|sc_logo.svg).*)",
-  ],
+  matcher: [],
 };
