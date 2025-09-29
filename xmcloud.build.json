@@ -19,15 +19,5 @@
       "runCommand": "start:angular"
     }
   },
-  "postActions": {
-    "actions": {
-      "populateSchema": {
-        "indexNames": []
-      },
-      "reindex": {
-        "indexNames": []
-      }
-    }
-  },
   "authoringPath": "./authoring"
 }
