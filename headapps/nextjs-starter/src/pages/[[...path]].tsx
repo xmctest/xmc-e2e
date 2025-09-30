@@ -1,5 +1,7 @@
 import { useEffect, JSX } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import sites from '.sitecore/sites.json';
+import scConfig from 'sitecore.config';
 import NotFound from 'src/NotFound';
 import Layout from 'src/Layout';
 import {
@@ -9,9 +11,7 @@ import {
   } from '@sitecore-content-sdk/nextjs';
 import { extractPath, handleEditorFastRefresh } from '@sitecore-content-sdk/nextjs/utils';
 import { isDesignLibraryPreviewData } from '@sitecore-content-sdk/nextjs/editing';
-import sites from '.sitecore/sites.json';
 import components from '.sitecore/component-map';
-import scConfig from 'sitecore.config';
 import client from 'lib/sitecore-client';
 import Providers from 'src/Providers';
 
