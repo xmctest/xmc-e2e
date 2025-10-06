@@ -14,7 +14,9 @@
       "assets/*": [
         "src/assets/*"
       ],
-      "next/*": ["node_modules/next/*"],
+      ".sitecore/*": [
+        ".sitecore/*"
+      ],
     },
     "target": "ES2017",
     "types": ["node"],
