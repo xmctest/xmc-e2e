@@ -1,8 +1,8 @@
-import { createRobotsRouteHandler } from "@sitecore-content-sdk/nextjs/route-handler";
-import sites from ".sitecore/sites.json";
-import client from "lib/sitecore-client";
+import { createRobotsRouteHandler } from '@sitecore-content-sdk/nextjs/route-handler';
+import sites from '.sitecore/sites.json';
+import client from 'lib/sitecore-client';
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 /**
  * API route for serving robots.txt
@@ -12,4 +12,7 @@ export const dynamic = "force-dynamic";
  * used by search engine crawlers to determine crawl and indexing rules.
  */
 
-export const { GET } = createRobotsRouteHandler({ client, sites });
+export const { GET } = createRobotsRouteHandler({
+  client,
+  sites,
+});
