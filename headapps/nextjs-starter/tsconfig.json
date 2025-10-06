@@ -14,6 +14,7 @@
       "assets/*": [
         "src/assets/*"
       ],
+      "next/*": ["node_modules/next/*"],
     },
     "target": "ES2017",
     "types": ["node"],
