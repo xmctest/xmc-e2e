@@ -69,19 +69,5 @@ export default async function Page({ params, searchParams }: PageProps) {
 // This function gets called at build and export time to determine
 // pages for SSG ("paths", as tokenized array).
 export const dynamic = "force-dynamic";
-export const generateStaticParams = async () => [];
 // Metadata fields for the page.
-export const generateMetadata = async ({ params }: PageProps) => {
-  try {
-    const { path, site, locale } = await params;
-    const page = await client.getPage(path ?? [], { site, locale });
-    return {
-      title:
-        (
-          page?.layout.sitecore.route?.fields as RouteFields
-        )?.Title?.value?.toString() || "Page",
-    };
-  } catch {
-    return { title: "Page" };
-  }
-};
+export const generateMetadata = async () => ({ title: "Page" });
