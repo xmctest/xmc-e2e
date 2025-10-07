@@ -1,15 +1,20 @@
-import Link from 'next/link';
-import client from 'lib/sitecore-client';
-import scConfig from 'sitecore.config';
-import { ErrorPage } from '@sitecore-content-sdk/nextjs';
-import Layout from 'src/Layout';
-import Providers from 'src/Providers';
+import Link from "next/link";
+import client from "lib/sitecore-client";
+import scConfig from "sitecore.config";
+import { ErrorPage } from "@sitecore-content-sdk/nextjs";
+import Layout from "src/Layout";
+import Providers from "src/Providers";
+
+export const dynamic = "force-dynamic";
 
 export default async function NotFound() {
-  const page = await client.getErrorPage(ErrorPage.NotFound, {
-    site: scConfig.defaultSite,
-    locale: scConfig.defaultLanguage,
-  });
+  const site = scConfig.defaultSite;
+  const page = site
+    ? await client.getErrorPage(ErrorPage.NotFound, {
+        site,
+        locale: scConfig.defaultLanguage,
+      })
+    : null;
 
   if (page) {
     return (
