@@ -16,17 +16,6 @@ export default defineCliConfig({
       }),
       extractFiles({
         scConfig,
-        paths: [
-          "src/app",
-          "src/components",
-          "src/lib",
-          "src/Providers.tsx",
-          "src/Layout.tsx",
-          "src/Bootstrap.tsx",
-          "src/middleware.ts",
-          "next.config.ts",
-          "sitecore.config.ts",
-        ],
       }),
       writeImportMap({
         paths: ["src/components"],
