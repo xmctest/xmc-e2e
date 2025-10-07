@@ -1,16 +1,16 @@
 import { isDesignLibraryPreviewData } from "@sitecore-content-sdk/nextjs/editing";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
-import { SiteInfo } from "@sitecore-content-sdk/nextjs";
-import sites from ".sitecore/sites.json";
-import { routing } from "src/i18n/routing";
 import client from "src/lib/sitecore-client";
-import Layout, { RouteFields } from "src/Layout";
+import Layout from "src/Layout";
 import components from ".sitecore/component-map";
 import Providers from "src/Providers";
 import Bootstrap from "src/Bootstrap";
 import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
+import { headers } from "next/headers";
+import { parseRewriteHeader } from "@sitecore-content-sdk/nextjs/utils";
+import scConfig from "sitecore.config";
 
 type PageProps = {
   params: Promise<{
@@ -26,8 +26,16 @@ export default async function Page({ params, searchParams }: PageProps) {
   const { site, locale, path } = await params;
   const draft = await draftMode();
 
+  // Resolve site/locale from params, rewrite header, or defaults
+  const hdrs = await headers();
+  const { site: headerSite, locale: headerLocale } = parseRewriteHeader(hdrs);
+  const resolvedSite =
+    site || (headerSite as string | undefined) || scConfig.defaultSite;
+  const resolvedLocale =
+    locale || (headerLocale as string | undefined) || scConfig.defaultLanguage;
+
   // Set site and locale to be available in src/i18n/request.ts for fetching the dictionary
-  setRequestLocale(`${site}_${locale}`);
+  setRequestLocale(`${resolvedSite}_${resolvedLocale}`);
 
   // Fetch the page data from Sitecore
   let page;
@@ -39,7 +47,10 @@ export default async function Page({ params, searchParams }: PageProps) {
       page = await client.getPreview(editingParams);
     }
   } else {
-    page = await client.getPage(path ?? [], { site, locale });
+    page = await client.getPage(path ?? [], {
+      site: resolvedSite,
+      locale: resolvedLocale,
+    });
   }
 
   // If the page is not found, return a 404
