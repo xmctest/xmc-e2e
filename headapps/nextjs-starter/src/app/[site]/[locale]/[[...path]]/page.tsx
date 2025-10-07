@@ -57,8 +57,6 @@ export default async function Page({ params, searchParams }: PageProps) {
   );
 }
 
-export const dynamic = 'force-dynamic';
-
 // This function gets called at build and export time to determine
 // pages for SSG ("paths", as tokenized array).
 export const generateStaticParams = async () => {
