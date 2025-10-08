@@ -1,8 +1,6 @@
 import { isDesignLibraryPreviewData } from "@sitecore-content-sdk/nextjs/editing";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
-import { headers } from "next/headers";
-import { parseRewriteHeader } from "@sitecore-content-sdk/nextjs/utils";
 import scConfig from "sitecore.config";
 import client from "src/lib/sitecore-client";
 import Layout, { RouteFields } from "src/Layout";
@@ -26,16 +24,8 @@ export default async function Page({ params, searchParams }: PageProps) {
   const { site, locale, path } = await params;
   const draft = await draftMode();
 
-  // Resolve site/locale from params, editor header, or defaults
-  const hdrs = await headers();
-  const { site: headerSite, locale: headerLocale } = parseRewriteHeader(hdrs);
-  const resolvedSite =
-    site || (headerSite as string | undefined) || scConfig.defaultSite;
-  const resolvedLocale =
-    locale || (headerLocale as string | undefined) || scConfig.defaultLanguage;
-
   // Set site and locale to be available in src/i18n/request.ts for fetching the dictionary
-  setRequestLocale(`${resolvedSite ?? "default"}_${resolvedLocale}`);
+  setRequestLocale(`${"test"}_${locale || scConfig.defaultLanguage}`);
 
   // Fetch the page data from Sitecore
   let page;
@@ -47,10 +37,10 @@ export default async function Page({ params, searchParams }: PageProps) {
       page = await client.getPreview(editingParams);
     }
   } else {
-    const options = resolvedSite
-      ? { site: resolvedSite, locale: resolvedLocale }
-      : { locale: resolvedLocale };
-    page = await client.getPage(path ?? [], options);
+    page = await client.getPage(path ?? [], {
+      site: "test",
+      locale: locale || scConfig.defaultLanguage,
+    });
   }
 
   // If the page is not found, return a 404

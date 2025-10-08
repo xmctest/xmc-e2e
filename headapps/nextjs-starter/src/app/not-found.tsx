@@ -8,13 +8,11 @@ import Providers from "src/Providers";
 export const dynamic = "force-dynamic";
 
 export default async function NotFound() {
-  const site = scConfig.defaultSite;
-  const page = site
-    ? await client.getErrorPage(ErrorPage.NotFound, {
-        site,
-        locale: scConfig.defaultLanguage,
-      })
-    : null;
+  const site = "test";
+  const page = await client.getErrorPage(ErrorPage.NotFound, {
+    site,
+    locale: scConfig.defaultLanguage,
+  });
 
   if (page) {
     return (
