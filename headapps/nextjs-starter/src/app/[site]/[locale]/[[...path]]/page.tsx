@@ -70,6 +70,13 @@ export default async function Page({ params, searchParams }: PageProps) {
 // This function gets called at build and export time to determine
 // pages for SSG ("paths", as tokenized array).
 export const dynamic = "force-dynamic";
-export const generateStaticParams = async () => [];
+export const generateStaticParams = async () => {
+  // TEMP DEBUG: ensure the gate is applied
+  // eslint-disable-next-line no-console
+  console.log("[SSG generateStaticParams]", {
+    generateStaticPaths: (scConfig as any)?.generateStaticPaths,
+  });
+  return [];
+};
 // Metadata fields for the page.
 export const generateMetadata = async () => ({ title: "Page" });
