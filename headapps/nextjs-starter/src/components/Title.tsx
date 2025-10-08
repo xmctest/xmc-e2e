@@ -17,7 +17,7 @@ interface Item {
 interface TitleProps extends ComponentProps {
   fields: {
     /**
-     * TestAfiq: The Integrated graphQL query result. This illustrates the way to access the context item datasource information.
+     * The Integrated graphQL query result. This illustrates the way to access the context item datasource information.
      */
     data?: {
       datasource?: Item;
