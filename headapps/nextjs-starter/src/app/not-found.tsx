@@ -8,6 +8,9 @@ import Providers from "src/Providers";
 export const dynamic = "force-dynamic";
 
 export default async function NotFound() {
+  // TEMP DEBUG: not-found render begin
+  // eslint-disable-next-line no-console
+  console.log("[PAGE] /_not-found");
   const site = "test";
   const page = await client.getErrorPage(ErrorPage.NotFound, {
     site,

@@ -21,6 +21,9 @@ type PageProps = {
 };
 
 export default async function Page({ params, searchParams }: PageProps) {
+  // TEMP DEBUG: page render begin
+  // eslint-disable-next-line no-console
+  console.log("[PAGE] /[site]/[locale]/[[...path]] start");
   const { site, locale, path } = await params;
   const draft = await draftMode();
 

@@ -11,6 +11,9 @@ import { NextIntlClientProvider } from "next-intl";
 export const dynamic = "force-dynamic";
 
 export default async function NotFound() {
+  // TEMP DEBUG: localized not-found begin
+  // eslint-disable-next-line no-console
+  console.log("[PAGE] /[site]/[locale]/[[...path]]/not-found");
   const headersList = await headers();
   const { site, locale } = parseRewriteHeader(headersList);
 
