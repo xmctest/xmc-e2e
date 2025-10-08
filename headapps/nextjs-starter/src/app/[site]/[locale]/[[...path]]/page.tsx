@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
 import scConfig from "sitecore.config";
 import client from "src/lib/sitecore-client";
-import Layout, { RouteFields } from "src/Layout";
+import Layout from "src/Layout";
 import components from ".sitecore/component-map";
 import Providers from "src/Providers";
 import Bootstrap from "src/Bootstrap";
@@ -73,9 +73,14 @@ export const dynamic = "force-dynamic";
 export const generateStaticParams = async () => {
   // TEMP DEBUG: ensure the gate is applied
   // eslint-disable-next-line no-console
-  console.log("[SSG generateStaticParams]", {
-    generateStaticPaths: (scConfig as any)?.generateStaticPaths,
-  });
+  {
+    const generateStaticPaths = (scConfig as Record<string, unknown>)[
+      "generateStaticPaths"
+    ] as boolean | undefined;
+    console.log("[SSG generateStaticParams]", {
+      generateStaticPaths,
+    });
+  }
   return [];
 };
 // Metadata fields for the page.
