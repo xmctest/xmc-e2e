@@ -1,27 +1,20 @@
-import Link from "next/link";
-import { headers } from "next/headers";
-import { ErrorPage } from "@sitecore-content-sdk/nextjs";
-import { parseRewriteHeader } from "@sitecore-content-sdk/nextjs/utils";
-import client from "lib/sitecore-client";
-import scConfig from "sitecore.config";
-import Layout from "src/Layout";
-import Providers from "src/Providers";
-import { NextIntlClientProvider } from "next-intl";
-
-export const dynamic = "force-dynamic";
+import Link from 'next/link';
+import { headers } from 'next/headers';
+import { ErrorPage } from '@sitecore-content-sdk/nextjs';
+import { parseRewriteHeader } from '@sitecore-content-sdk/nextjs/utils';
+import client from 'lib/sitecore-client';
+import scConfig from 'sitecore.config';
+import Layout from 'src/Layout';
+import Providers from 'src/Providers';
+import { NextIntlClientProvider } from 'next-intl';
 
 export default async function NotFound() {
-  // TEMP DEBUG: localized not-found begin
-  // eslint-disable-next-line no-console
-  console.log("[PAGE] /[site]/[locale]/[[...path]]/not-found");
   const headersList = await headers();
   const { site, locale } = parseRewriteHeader(headersList);
 
-  const resolvedSite = site || "test";
-  const resolvedLocale = locale || scConfig.defaultLanguage;
   const page = await client.getErrorPage(ErrorPage.NotFound, {
-    site: resolvedSite,
-    locale: resolvedLocale,
+    site: site || scConfig.defaultSite,
+    locale: locale || scConfig.defaultLanguage,
   });
 
   if (page) {

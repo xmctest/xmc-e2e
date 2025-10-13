@@ -1,11 +1,5 @@
-import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
-
-// TEMP DEBUG: confirm next.config.ts is loaded in build
-// eslint-disable-next-line no-console
-console.log("[NEXT_CONFIG] loading next.config.ts", {
-  nodeEnv: process.env.NODE_ENV,
-});
+import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
   // use this configuration to ensure that only images from the whitelisted domains
@@ -14,14 +8,14 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "edge*.**",
-        port: "",
+        protocol: 'https',
+        hostname: 'edge*.**',
+        port: '',
       },
       {
-        protocol: "https",
-        hostname: "xmc-*.**",
-        port: "",
+        protocol: 'https',
+        hostname: 'xmc-*.**',
+        port: '',
       },
     ],
   },
@@ -29,13 +23,13 @@ const nextConfig: NextConfig = {
   rewrites: async () => {
     return [
       {
-        source: "/sitemap:id([\\w-]{0,}).xml",
-        destination: "/api/sitemap",
+        source: '/sitemap:id([\\w-]{0,}).xml',
+        destination: '/api/sitemap',
         locale: false,
       },
       {
-        source: "/robots.txt",
-        destination: "/api/robots",
+        source: '/robots.txt',
+        destination: '/api/robots',
         locale: false,
       },
     ];

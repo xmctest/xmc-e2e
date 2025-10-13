@@ -16,11 +16,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "build": "cross-env NODE_ENV=production npm-run-all --serial echo:prebuild sitecore-tools:generate-map sitecore-tools:build echo:nb:start next:build echo:nb:end echo:postbuild",
-    "echo:prebuild": "echo [BUILD_START]",
-    "echo:nb:start": "echo [NEXT_BUILD_START]",
-    "echo:nb:end": "echo [NEXT_BUILD_END]",
-    "echo:postbuild": "echo [BUILD_END]",
+    "build": "cross-env NODE_ENV=production npm-run-all --serial sitecore-tools:generate-map sitecore-tools:build next:build",
     "lint": "eslint ./src/**/*.tsx ./src/**/*.ts",
     "next:build": "next build",
     "next:dev": "cross-env NODE_OPTIONS='--inspect' next dev",
@@ -34,7 +30,7 @@
   "dependencies": {
     "@sitecore-cloudsdk/core": "^0.5.4",
     "@sitecore-cloudsdk/events": "^0.5.4",
-    "@sitecore-content-sdk/nextjs": "1.2.0-canary.32",
+    "@sitecore-content-sdk/nextjs": "1.2.0-canary.37",
     "next": "^15.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -43,7 +39,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@sitecore-content-sdk/cli": "1.2.0-canary.32",
+    "@sitecore-content-sdk/cli": "1.2.0-canary.37",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^22.15.14",
     "@types/react": "^19.1.10",
