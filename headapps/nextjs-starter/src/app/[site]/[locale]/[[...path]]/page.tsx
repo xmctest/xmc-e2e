@@ -1,25 +1,19 @@
-import { isDesignLibraryPreviewData } from "@sitecore-content-sdk/nextjs/editing";
-import { notFound } from "next/navigation";
-import { draftMode } from "next/headers";
-import { SiteInfo } from "@sitecore-content-sdk/nextjs";
-import sites from ".sitecore/sites.json";
-import { routing } from "src/i18n/routing";
-import client from "src/lib/sitecore-client";
-import scConfig from "sitecore.config";
-import Layout, { RouteFields } from "src/Layout";
-import components from ".sitecore/component-map";
-import Providers from "src/Providers";
-import Bootstrap from "src/Bootstrap";
-import { NextIntlClientProvider } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { isDesignLibraryPreviewData } from '@sitecore-content-sdk/nextjs/editing';
+import { notFound } from 'next/navigation';
+import { draftMode } from 'next/headers'
+import { SiteInfo } from '@sitecore-content-sdk/nextjs';
+import sites from '.sitecore/sites.json';
+import { routing } from 'src/i18n/routing';
+import client from 'src/lib/sitecore-client';
+import Layout, { RouteFields } from 'src/Layout';
+import components from '.sitecore/component-map';
+import Providers from 'src/Providers';
+import Bootstrap from 'src/Bootstrap';
+import { NextIntlClientProvider } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
 
 type PageProps = {
-  params: Promise<{
-    site: string;
-    locale: string;
-    path?: string[];
-    [key: string]: string | string[] | undefined;
-  }>;
+  params: Promise<{ site: string; locale: string; path?: string[]; [key: string]: string | string[] | undefined }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
@@ -49,11 +43,7 @@ export default async function Page({ params, searchParams }: PageProps) {
   }
 
   // Fetch the component data from Sitecore (Likely will be deprecated)
-  const componentProps = await client.getComponentData(
-    page.layout,
-    {},
-    components
-  );
+  const componentProps = await client.getComponentData(page.layout, {}, components);
 
   return (
     <>
@@ -70,23 +60,17 @@ export default async function Page({ params, searchParams }: PageProps) {
 // This function gets called at build and export time to determine
 // pages for SSG ("paths", as tokenized array).
 export const generateStaticParams = async () => {
-  if (process.env.NODE_ENV !== "development" && scConfig.generateStaticPaths) {
-    return await client.getAppRouterStaticParams(
-      sites.map((site: SiteInfo) => site.name),
-      routing.locales.slice()
-    );
-  }
-  return [];
+  return await client.getAppRouterStaticParams(
+    sites.map((site: SiteInfo) => site.name),
+    routing.locales.slice()
+  );
 };
 // Metadata fields for the page.
 export const generateMetadata = async ({ params }: PageProps) => {
   const { path } = await params;
   // The same call as for rendering the page. Should be cached by default react behavior
-  const page = await client.getPage(path ?? [], { locale: "en" });
+  const page = await client.getPage(path ?? [], { locale: 'en' });
   return {
-    title:
-      (
-        page?.layout.sitecore.route?.fields as RouteFields
-      )?.Title?.value?.toString() || "Page",
+    title: (page?.layout.sitecore.route?.fields as RouteFields)?.Title?.value?.toString() || 'Page',
   };
 };
