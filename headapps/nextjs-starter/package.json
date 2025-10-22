@@ -30,7 +30,7 @@
   "dependencies": {
     "@sitecore-cloudsdk/core": "^0.5.4",
     "@sitecore-cloudsdk/events": "^0.5.4",
-    "@sitecore-content-sdk/nextjs": "1.2.0-canary.40",
+    "@sitecore-content-sdk/nextjs": "1.2.0-canary.42",
     "next": "^15.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@sitecore-content-sdk/cli": "1.2.0-canary.40",
+    "@sitecore-content-sdk/cli": "1.2.0-canary.42",
     "@tailwindcss/postcss": "^4.1.14",
     "@types/node": "^22.15.14",
     "@types/react": "^19.1.10",

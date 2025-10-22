@@ -10,10 +10,10 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['BYOCWrapper', BYOCWrapper],
   ['FEaaSWrapper', FEaaSWrapper],
   ['Form', Form],
-  ['Title', Title],
-  ['PageContent', PageContent],
-  ['Navigation', Navigation],
-  ['Image', Image],
+  ['Title', { ...Title }],
+  ['PageContent', { ...PageContent }],
+  ['Navigation', { ...Navigation }],
+  ['Image', { ...Image }],
 ]);
 
 export default componentMap;
