@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import Placeholder from 'components/content-sdk/Placeholder';
+import { AppPlaceholder } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { componentMap } from '.sitecore/component-map';
 
@@ -45,7 +45,7 @@ export const Default = ({ params, rendering, page }: ColumnSplitterProps): JSX.E
         return (
           <div key={index} className={columnClassNames}>
             <div className="row">
-              <Placeholder name={`column-${columnNum}-{*}`} rendering={rendering} page={page} componentMap={componentMap} />
+              <AppPlaceholder name={`column-${columnNum}-{*}`} rendering={rendering} page={page} componentMap={componentMap} />
             </div>
           </div>
         );

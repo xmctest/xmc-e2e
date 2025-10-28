@@ -1,6 +1,6 @@
 import React, { JSX } from 'react';
 import { ComponentRendering } from '@sitecore-content-sdk/nextjs';
-import Placeholder from 'components/content-sdk/Placeholder';
+import { AppPlaceholder } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { componentMap } from '.sitecore/component-map';
 
@@ -38,7 +38,7 @@ export const Default = ({ params, rendering, page }: RowSplitterProps): JSX.Elem
           <div key={index} className={`container-fluid ${rowStyles}`.trimEnd()}>
             <div>
               <div className="row">
-                <Placeholder name={placeholderKey} rendering={rendering} page={page} componentMap={componentMap} />
+                <AppPlaceholder name={placeholderKey} rendering={rendering} page={page} componentMap={componentMap} />
               </div>
             </div>
           </div>
