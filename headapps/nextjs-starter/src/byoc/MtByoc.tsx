@@ -7,7 +7,7 @@ import * as FEAAS from '@sitecore-feaas/clientside/react';
  * A simple example BYOC component for testing registration.
  * It just displays a colored box with a message and the current date.
  */
-const MtByoc = (props: FEAAS.ExternalComponentProps) => {
+const MtByoc = () => {
   return (
     <div
       style={{
