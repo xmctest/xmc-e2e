@@ -1,5 +1,4 @@
 import * as FEAAS from '@sitecore-feaas/clientside/react';
-import './MtByoc';
 /**
  * You can import your own client components here
  * @example
