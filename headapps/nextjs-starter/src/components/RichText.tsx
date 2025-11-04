@@ -26,6 +26,7 @@ export const Default = ({ params, fields }: RichTextProps): JSX.Element => {
   );
 };
 
+/*
 export const WithText = ({ params, fields }: RichTextProps): JSX.Element => {
   const { RenderingIdentifier, styles } = params;
 
@@ -40,3 +41,4 @@ export const WithText = ({ params, fields }: RichTextProps): JSX.Element => {
     </div>
   );
 };
+*/
