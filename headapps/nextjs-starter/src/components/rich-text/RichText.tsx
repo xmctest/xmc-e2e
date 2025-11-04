@@ -32,10 +32,11 @@ export const WithText = ({ params, fields }: RichTextProps): JSX.Element => {
   return (
     <div className={`component rich-text ${styles}`} id={RenderingIdentifier}>
       <div className="component-content">
-        <div style={{ border: '1px dashed orange', padding: '8px' }}>
-          <strong>WithText variant:</strong>
-          <JssRichText field={fields?.Text} />
-        </div>
+        {fields ? (
+          <ContentSdkRichText field={fields.Text} />
+        ) : (
+          <span className="is-empty-hint">Rich text</span>
+        )}
       </div>
     </div>
   );
