@@ -1,10 +1,10 @@
-import { JSX } from 'react';
+import React, { JSX } from 'react';
 import {
   Link,
-  LinkField,
   Text,
-  TextField,
   useSitecoreContext,
+  LinkField,
+  TextField,
 } from '@sitecore-jss/sitecore-jss-nextjs';
 
 interface Fields {
@@ -17,8 +17,7 @@ interface Fields {
       field: {
         jsonValue: {
           value: string;
-          editable?: string;
-          metadata?: { [key: string]: unknown };
+          editable: string;
         };
       };
     };
@@ -30,8 +29,7 @@ interface Fields {
       field: {
         jsonValue: {
           value: string;
-          editable?: string;
-          metadata?: { [key: string]: unknown };
+          editable: string;
         };
       };
     };
@@ -52,7 +50,7 @@ type ComponentContentProps = {
 const ComponentContent = (props: ComponentContentProps) => {
   const id = props.id;
   return (
-    <div className={`component title ${props?.styles}`} id={id ? id : undefined}>
+    <div className={`component title ${props.styles}`} id={id ? id : undefined}>
       <div className="component-content">
         <div className="field-title">{props.children}</div>
       </div>
@@ -63,25 +61,30 @@ const ComponentContent = (props: ComponentContentProps) => {
 export const Default = (props: TitleProps): JSX.Element => {
   const datasource = props.fields?.data?.datasource || props.fields?.data?.contextItem;
   const { sitecoreContext } = useSitecoreContext();
-  const text: TextField = datasource?.field?.jsonValue || {};
+
+  const text: TextField = {
+    value: datasource?.field?.jsonValue?.value,
+    editable: datasource?.field?.jsonValue?.editable,
+  };
   const link: LinkField = {
     value: {
       href: datasource?.url?.path,
       title: datasource?.field?.jsonValue?.value,
+      editable: true,
     },
   };
   if (sitecoreContext.pageState !== 'normal') {
     link.value.querystring = `sc_site=${datasource?.url?.siteName}`;
-    if (!text?.value) {
+    if (!text.value) {
       text.value = 'Title field';
       link.value.href = '#';
     }
   }
 
   return (
-    <ComponentContent styles={props?.params?.styles} id={props?.params?.RenderingIdentifier}>
+    <ComponentContent styles={props.params.styles} id={props.params.RenderingIdentifier}>
       <>
-        {sitecoreContext.pageEditing ? (
+        {sitecoreContext.pageState === 'edit' ? (
           <Text field={text} />
         ) : (
           <Link field={link}>
