@@ -1,24 +1,23 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { JssContextService } from './jss-context.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  /* eslint-disable-next-line @angular-eslint/prefer-standalone */
-  standalone: false,
+  templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnDestroy {
   private contextSubscription: Subscription;
-  private translate = inject(TranslateService);
-  private jssContextService = inject(JssContextService);
 
-  ngOnInit() {
-    this.contextSubscription = this.jssContextService.state.subscribe((jssState: { language: string }) => {
+  constructor(
+    translate: TranslateService,
+    jssContextService: JssContextService,
+  ) {
+    this.contextSubscription = jssContextService.state.subscribe(jssState => {
       // listen for language changes
       if (jssState.language) {
-        this.translate.use(jssState.language);
+        translate.use(jssState.language);
       }
     });
   }

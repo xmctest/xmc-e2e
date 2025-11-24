@@ -1,22 +1,17 @@
 /* eslint-disable no-shadow, no-console */
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   RouteData,
   Field,
   LayoutServiceContextData,
   getContentStylesheetLink,
-  JssModule,
 } from '@sitecore-jss/sitecore-jss-angular';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JssState } from '../../JssState';
 import { JssMetaService } from '../../jss-meta.service';
 import { JssLinkService } from '../../jss-link.service';
-import { NotFoundComponent } from '../not-found/not-found.component';
-import { ServerErrorComponent } from '../server-error/server-error.component';
-import { ScriptsComponent } from '../scripts/scripts.component';
 import { environment as env } from '../../../environments/environment';
-import { CommonModule } from '@angular/common';
 
 enum LayoutState {
   Layout,
@@ -32,7 +27,6 @@ interface RouteFields {
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  imports: [CommonModule, JssModule, NotFoundComponent, ServerErrorComponent, ScriptsComponent],
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   route: RouteData<RouteFields>;
@@ -42,9 +36,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
   errorContextData: LayoutServiceContextData;
   mainClassPageEditing: string;
 
-  private activatedRoute = inject(ActivatedRoute);
-  private readonly meta = inject(JssMetaService);
-  private linkService = inject(JssLinkService);
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private readonly meta: JssMetaService,
+    private linkService: JssLinkService
+  ) {}
 
   ngOnInit() {
     // route data is populated by the JssRouteResolver

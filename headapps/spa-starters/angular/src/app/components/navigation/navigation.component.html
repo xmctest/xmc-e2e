@@ -9,9 +9,12 @@
   <div class="component-content">
     <nav>
       <ul class="clearfix">
-        @for (navItemFields of fieldKeys; track $index) {
-          <app-navigation-item [navItemFields]="rendering.fields[navItemFields]" [relativeLevel]="baseLevel" (childLinkClickEvent)="toggleMenu($event, false)"></app-navigation-item>
-        }
+        <app-navigation-item
+          *ngFor="let navItemFields of rendering.fields"
+          [navItemFields]="navItemFields"
+          [relativeLevel]="baseLevel"
+          (childLinkClickEvent)="toggleMenu($event, false)"
+        ></app-navigation-item>
       </ul>
     </nav>
   </div>

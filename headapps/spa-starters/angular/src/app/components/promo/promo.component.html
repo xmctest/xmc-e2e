@@ -1,5 +1,5 @@
 <div class="component-content">
-  @if (rendering.fields) {
+  <ng-container *ngIf="rendering.fields; else empty">
     <div class="field-promoicon">
       <img *scImage="rendering.fields.PromoIcon" />
     </div>
@@ -13,7 +13,9 @@
         <a *scGenericLink="rendering.fields.PromoLink"></a>
       </div>
     </div>
-  } @else {
-    <span className="is-empty-hint">Promo</span>
-  }
+  </ng-container>
 </div>
+
+<ng-template #empty>
+  <span className="is-empty-hint">Promo</span>
+</ng-template>

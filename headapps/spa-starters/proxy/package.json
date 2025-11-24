@@ -10,14 +10,14 @@
     "start": "ts-node ./src/index.ts"
   },
   "dependencies": {
-    "@sitecore-jss/sitecore-jss-proxy": "22.10.0-canary.10",
+    "@sitecore-jss/sitecore-jss-proxy": "~22.9.1",
     "compression": "^1.8.1",
     "express": "^5.1.0",
     "dotenv": "^17.2.1",
     "http-proxy-middleware": "^3.0.5"
   },
   "devDependencies": {
-    "@sitecore-jss/sitecore-jss": "22.10.0-canary.10",
+    "@sitecore-jss/sitecore-jss": "~22.9.1",
     "@types/compression": "^1.8.1",
     "@types/express": "^5.0.3",
     "ts-node": "^10.9.1",

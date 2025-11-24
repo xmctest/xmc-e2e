@@ -1,9 +1,10 @@
 <div clas="component-content">
   <div class="field-title">
-    @if (!pageEditing) {
+    <ng-container *ngIf="!pageEditing; else textOnly">
       <a *scGenericLink="link"></a>
-    } @else {
-      <span *scText="text"></span>
-    }
+    </ng-container>
   </div>
 </div>
+<ng-template #textOnly>
+  <span *scText="text"></span>
+</ng-template>

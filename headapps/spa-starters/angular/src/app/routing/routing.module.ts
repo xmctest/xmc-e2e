@@ -7,7 +7,9 @@ import { jssRouteResolver } from './jss-route-resolver.service';
 import { JssRouteBuilderService } from './jss-route-builder.service';
 import { JssModule } from '@sitecore-jss/sitecore-jss-angular';
 import { BrowserModule } from '@angular/platform-browser';
+import { NavigationComponent } from './navigation/navigation.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ScriptsModule } from './scripts/scripts.module';
 
 export function jssRouteMatcher(url: UrlSegment[]): UrlMatchResult {
   // use the route builder to parse out language / server route
@@ -52,11 +54,10 @@ const routes: Routes = [
     JssModule,
     TranslateModule,
     BrowserModule,
-    LayoutComponent,
-    NotFoundComponent,
-    ServerErrorComponent,
+    ScriptsModule,
   ],
   exports: [RouterModule, TranslateModule],
+  declarations: [NotFoundComponent, ServerErrorComponent, LayoutComponent, NavigationComponent],
   providers: [JssRouteBuilderService],
 })
 export class RoutingModule {}

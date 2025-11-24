@@ -14,7 +14,8 @@ import { NavigationItemComponent } from './navigation/navigation-item.component'
   Don't want code generation? See ./.gitignore for instructions to turn it off.
 */
 @NgModule({
-  imports: [CommonModule, TranslateModule, RouterModule, JssModule, FormsModule, NavigationItemComponent],
+  imports: [CommonModule, TranslateModule, RouterModule, JssModule, FormsModule],
   exports: [CommonModule, TranslateModule, RouterModule, FormsModule, NavigationItemComponent],
+  declarations: [NavigationItemComponent],
 })
 export class AppComponentsSharedModule {}

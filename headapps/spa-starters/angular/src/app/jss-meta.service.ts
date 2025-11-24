@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 export interface MetaSettings {
@@ -7,8 +7,7 @@ export interface MetaSettings {
 
 @Injectable()
 export class JssMetaService {
-  protected titleService = inject(Title);
-  protected meta = inject(Meta);
+  constructor(private titleService: Title, private meta: Meta) {}
 
   setTitle(title?: string) {
     this.titleService.setTitle(title);

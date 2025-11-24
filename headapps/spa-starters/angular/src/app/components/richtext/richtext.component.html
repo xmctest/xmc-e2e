@@ -1,7 +1,8 @@
 <div class="component-content">
-  @if (text) {
+  <ng-container *ngIf="text; else emptyHint">
     <div *scRichText="text"></div>
-  } @else {
+  </ng-container>
+  <ng-template #emptyHint>
     <span class="is-empty-hint">Rich text</span>
-  }
+  </ng-template>
 </div>
