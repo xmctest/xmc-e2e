@@ -25,20 +25,3 @@ export const Default = ({ params, fields }: RichTextProps): JSX.Element => {
     </div>
   );
 };
-
-/*
-export const WithText = ({ params, fields }: RichTextProps): JSX.Element => {
-  const { RenderingIdentifier, styles } = params;
-
-  return (
-    <div className={`component rich-text ${styles}`} id={RenderingIdentifier}>
-      <div className="component-content">
-        <div style={{ border: '1px dashed orange', padding: '8px' }}>
-          <strong>WithText variant:</strong>
-          <JssRichText field={fields?.Text} />
-        </div>
-      </div>
-    </div>
-  );
-};
-*/
