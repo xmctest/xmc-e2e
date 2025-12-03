@@ -9,18 +9,19 @@ import sites from '.sitecore/sites.json';
 import scConfig from 'sitecore.config';
 
 export function middleware(req: NextRequest, ev: NextFetchEvent) {
-  // If no Edge server contextId, skip Edge middlewares entirely.
-  // (SSR/API can still use Local creds; no crash in Edge runtime.)
-  if (!scConfig.api?.edge?.contextId) {
+  // Skip middlewares only if neither Edge nor local API configuration is available.
+  // Middlewares can work with either Edge (contextId) or local (apiHost/apiKey) configuration.
+  if (!scConfig.api?.edge?.contextId && !scConfig.api?.local?.apiHost) {
     return NextResponse.next();
   }
 
-  // Instantiate AFTER the guard so constructors don’t run in local-only mode
+  // Instantiate middlewares - they will use Edge config if available, otherwise fall back to local config
   const multisite = new MultisiteMiddleware({
     /**
      * List of sites for site resolver to work with
      */
     sites,
+    ...scConfig.api.edge,
     ...scConfig.multisite,
     // This function determines if the middleware should be turned off on per-request basis.
     // Certain paths are ignored by default (e.g. files and Next.js API routes), but you may wish to disable more.
@@ -54,8 +55,6 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
     // Certain paths are ignored by default (e.g. Next.js API routes), but you may wish to disable more.
     // By default it is disabled while in development mode.
     // This is an important performance consideration since Next.js Edge middleware runs on every request
-    // NOTE: Personalize requires Edge configuration and cannot work with local containers.
-    // The middleware will disable itself if Edge config is not present.
     skip: () => false,
     // This is an example of how to provide geo data for personalization.
     // The provided callback will be called on each request to extract geo data.
