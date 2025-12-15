@@ -1,6 +1,12 @@
 import React, { JSX } from 'react';
 import { RichText as ContentSdkRichText } from '@sitecore-content-sdk/nextjs';
-import { RichTextProps } from './RichText.types';
+import { ComponentProps } from 'lib/component-props';
+
+interface Fields {
+  Text: { value: string };
+}
+
+type RichTextProps = ComponentProps & { fields: Fields };
 
 export const WithText = ({ params, fields }: RichTextProps): JSX.Element => {
   const { RenderingIdentifier, styles } = params;
@@ -8,7 +14,7 @@ export const WithText = ({ params, fields }: RichTextProps): JSX.Element => {
   return (
     <div className={`component rich-text ${styles}`} id={RenderingIdentifier || undefined}>
       <div className="component-content">
-        <strong>WithText variantoss:</strong>
+        <strong>WithText variantISSSS:</strong>
         {fields ? <ContentSdkRichText field={fields.Text} /> : <span className="is-empty-hint">Rich text</span>}
       </div>
     </div>
