@@ -5,7 +5,7 @@
   "description": "This repository contains the Starter Kits for Sitecore XM Cloud Development.",
   "scripts": {
     "install-build:angular": "pnpm install && pnpm build:angular",
-    "build:angular": "pnpm -F=angular-starter build",
+    "build:angular": "pnpm -F=sitecore-jss-app build",
     "start:angular": "pnpm -F=node-xmcloud-sample start"
   },
   "license": "ISC",
