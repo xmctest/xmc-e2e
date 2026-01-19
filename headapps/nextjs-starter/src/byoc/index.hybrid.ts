@@ -7,4 +7,6 @@
  */
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {};
+import './QoutePropsByoc';
+const hybridComponents = {};
+export default hybridComponents;
