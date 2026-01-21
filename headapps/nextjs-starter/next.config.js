@@ -7,6 +7,8 @@ const publicUrl = jssConfig.publicUrl;
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  basePath: '/test',
+  
   // Set assetPrefix to our public URL
   assetPrefix: publicUrl,
 
