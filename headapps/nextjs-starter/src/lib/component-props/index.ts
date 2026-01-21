@@ -1,33 +1,63 @@
-import { ComponentParams, ComponentRendering, Page } from '@sitecore-content-sdk/nextjs';
+import {
+  ComponentParams,
+  ComponentRendering,
+  SitecoreContextValue,
+  LayoutServiceData,
+  ComponentPropsService,
+  ComponentPropsCollection,
+  ComponentPropsError,
+} from '@sitecore-jss/sitecore-jss-nextjs';
+import { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
+import { isServerSidePropsContext } from 'lib/page-props-factory';
+import { moduleFactory } from 'temp/componentBuilder';
 
 /**
  * Shared component props
  */
 export type ComponentProps = {
   rendering: ComponentRendering;
-  params: ComponentParams & {
-    /**
-     * The identifier for the rendering
-     */
-    RenderingIdentifier?: string;
-    /**
-     * The styles for the rendering
-     * This value is calculated by the Placeholder component
-     */
-    styles?: string;
-    /**
-     * The enabled placeholders for the rendering
-     */
-    EnabledPlaceholders?: string;
-  };
+  params: ComponentParams;
 };
 
 /**
  * Component props with context
- * You can access `page` by withSitecore/useSitecore
- * @example withSitecore()(ContentBlock)
- * @example const { page } = useSitecore()
+ * You can access `sitecoreContext` by withSitecoreContext/useSitecoreContext
+ * @example withSitecoreContext()(ContentBlock)
+ * @example const { sitecoreContext } = useSitecoreContext()
  */
 export type ComponentWithContextProps = ComponentProps & {
-  page: Page;
+  sitecoreContext: SitecoreContextValue;
 };
+
+/**
+ * Fetch component props for a given layout data and context
+ * @param {LayoutServiceData} layoutData - The layout data to fetch component props for
+ * @param {GetServerSidePropsContext | GetStaticPropsContext} context - The context to fetch component props for
+ * @returns {ComponentPropsCollection} The component props
+ * @throws {Error} If there are errors during component props fetching
+ */
+export async function fetchComponentProps(
+  layoutData: LayoutServiceData,
+  context: GetServerSidePropsContext | GetStaticPropsContext
+): Promise<ComponentPropsCollection> {
+  const service = new ComponentPropsService();
+
+  const componentProps = isServerSidePropsContext(context)
+    ? await service.fetchServerSideComponentProps({ layoutData, context, moduleFactory })
+    : await service.fetchStaticComponentProps({ layoutData, context, moduleFactory });
+
+  const errors = Object.keys(componentProps)
+    .map((id) => {
+      const c = componentProps[id] as ComponentPropsError;
+      return c?.error
+        ? `\nUnable to get component props for ${c.componentName} (${id}): ${c.error}`
+        : '';
+    })
+    .join('');
+
+  if (errors.length) {
+    throw new Error(errors);
+  }
+
+  return componentProps;
+}

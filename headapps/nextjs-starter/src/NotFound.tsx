@@ -1,5 +1,5 @@
-import Head from 'next/head';
 import { JSX } from 'react';
+import Head from 'next/head';
 
 /**
  * Rendered in case if we have 404 error
