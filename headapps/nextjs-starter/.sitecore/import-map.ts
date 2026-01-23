@@ -7,7 +7,6 @@ import {
 } from '@sitecore-content-sdk/nextjs/codegen';
 // end of built-in imports
 
-import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import { useState, useEffect } from 'react';
 import React from 'react';
 import * as FEAAS from '@sitecore-feaas/clientside/react';
@@ -20,14 +19,6 @@ import { pageView } from '@sitecore-cloudsdk/events/browser';
 import config from 'sitecore.config';
 
 const importMap = [
-  {
-    module: 'react/jsx-runtime',
-    exports: [
-      { name: 'jsx', value: jsx },
-      { name: 'jsxs', value: jsxs },
-      { name: 'Fragment', value: Fragment },
-    ]
-  },
   {
     module: 'react',
     exports: [
