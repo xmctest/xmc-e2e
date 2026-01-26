@@ -6,9 +6,8 @@ import config from 'sitecore.config';
 
 /**
  * This is the CDP page view component.
- * It uses the Sitecore Cloud SDK to enable page view events on the client-side.
- * See Sitecore Cloud SDK documentation for details.
- * https://www.npmjs.com/package/@sitecore-cloudsdk/events
+ * See Sitecore Content SDK documentation for details.
+ * https://www.npmjs.com/package/@sitecore-content-sdk/events
  */
 const CdpPageView = (): JSX.Element => {
   const {
