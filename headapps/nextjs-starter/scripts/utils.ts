@@ -37,7 +37,6 @@ export function getItems<Item>(settings: {
     }
 
     if (fileFormat.test(item.name)) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const name = item.name.match(fileFormat)![1];
       items.push(resolveItem(path, name));
       if (cb) cb(name);

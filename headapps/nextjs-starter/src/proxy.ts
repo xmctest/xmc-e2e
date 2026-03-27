@@ -1,7 +1,6 @@
 import type { NextRequest } from 'next/server';
 import middleware from 'lib/middleware';
 
-// eslint-disable-next-line
 export default async function proxy(req: NextRequest) {
   return middleware(req);
 }
