@@ -1,4 +1,4 @@
-/* eslint-disable no-shadow, no-console */
+ 
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import {
   RouteData,

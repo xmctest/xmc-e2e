@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 export default {
   __schema: {
     types: [
