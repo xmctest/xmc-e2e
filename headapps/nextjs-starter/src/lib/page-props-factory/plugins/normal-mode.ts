@@ -31,7 +31,7 @@ class NormalModePlugin implements Plugin {
     props.layoutData = await layoutService.fetchLayoutData(
       path,
       props.locale,
-      // eslint-disable-next-line prettier/prettier
+
       isServerSidePropsContext(context) ? (context as GetServerSidePropsContext).req : undefined,
       isServerSidePropsContext(context) ? (context as GetServerSidePropsContext).res : undefined
     );
@@ -58,7 +58,6 @@ class NormalModePlugin implements Plugin {
 
   private getDictionaryService(siteName: string): DictionaryService {
     if (this.dictionaryServices.has(siteName)) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return this.dictionaryServices.get(siteName)!;
     }
 
@@ -70,7 +69,6 @@ class NormalModePlugin implements Plugin {
 
   private getLayoutService(siteName: string): LayoutService {
     if (this.layoutServices.has(siteName)) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return this.layoutServices.get(siteName)!;
     }
 
