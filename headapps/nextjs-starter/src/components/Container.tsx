@@ -16,7 +16,7 @@ const DefaultContainer = (props: ComponentProps): JSX.Element => {
   const phKey = `container-${props?.params?.DynamicPlaceholderId}`;
   const id = props?.params?.RenderingIdentifier;
   const mediaUrlPattern = new RegExp(/mediaurl=\"([^"]*)\"/, 'i');
-  const backgroundImage = props?.params?.BackgroundImage as string;
+  let backgroundImage = props?.params?.BackgroundImage as string;
   let backgroundStyle: { [key: string]: string } = {};
 
   if (backgroundImage && backgroundImage.match(mediaUrlPattern)) {

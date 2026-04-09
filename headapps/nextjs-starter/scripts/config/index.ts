@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const plugins = require('scripts/temp/config-plugins');
 import { JssConfig } from 'lib/config';
 

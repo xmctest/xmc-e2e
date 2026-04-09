@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const plugins = require('scripts/temp/generate-component-builder-plugins');
 import { PackageDefinition, ComponentFile } from '@sitecore-jss/sitecore-jss-dev-tools';
 
